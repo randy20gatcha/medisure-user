@@ -3,8 +3,9 @@
    <!-- <input type="text" placeholder="Enter employee id" > -->
    <!-- <button @click="getUser">Click</button> -->
    <div>
-     <div v-for="user in getUser()" :key="user.id" class="user">
+     <div v-for="user in users" :key="user.firstName">
        <p>{{ user.firstName }}</p> 
+         
      </div>
    </div>
 
@@ -13,21 +14,28 @@
 <script>
 import { ref } from '@vue/reactivity';
 import { getDocs } from 'firebase/firestore';
-import { employees } from '@/firebase';
+import { employees, getUsers, useLoadUsers } from '@/firebase';
 
-export default {
-    setup() {
-      const users = [];
-          
-       const getUser = () => {
-         getDocs(employees).then((snapshot) => {          
-           snapshot.docs.forEach((doc) => {
-             users.push({ ...doc.data(), id: doc.id });
-           })
-           console.log(users);
-         })        
-       }
-       return { users, getUser }
+export default {  
+    name: "clientView",
+    components: {},
+    data() {
+      return {
+        users: []
+      }
+    },
+    methods: {
+      async getData() {
+        const fetchData = await getDocs(employees);
+        const users = [];
+        fetchData.forEach((user) => {
+          users.push(user.data());
+        })
+        this.users = users;
+      }
+    },
+    created() {
+      this.getData();
     }
    
 }

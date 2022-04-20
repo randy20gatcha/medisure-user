@@ -1,7 +1,7 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -12,13 +12,18 @@ const firebaseConfig = {
     messagingSenderId: "943820419606",
     appId: "1:943820419606:web:70bcae12737b605be67b37"
   };
-  initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // get db
-const db = getFirestore();
+const db = getFirestore(app);
 
 // initialize services
-export const employees = collection(db, 'users');
+export const employees = collection(db,'users');
+
+export const getUsers =  (id) => {
+  const user =  employees.doc(id).get();
+  return user.exists ? user.data : null;
+}
 
 // To initialize user state, whether auth or not  
 export const getUserState = () =>
@@ -30,7 +35,7 @@ export const useAuthState = () => {
   const user = ref(null)
   const error = ref(null)
 
-  const auth = getAuth()
+ 
   let unsubscribe
   onMounted(() => {
     unsubscribe = onAuthStateChanged(
@@ -54,3 +59,4 @@ export const useLoadUsers = () => {
   onUnmounted(close);
   return users;
 }
+ 

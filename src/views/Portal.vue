@@ -68,20 +68,25 @@ export default {
       })
     }
     // working... pushing data to firestore
-    const onSubmit = () => {
-      addDoc(employees, {
+    const onSubmit = async () => {
+      await addDoc(employees, {
         firstName: firstName.value,
         lastName: lastName.value,
         employeeNumber: employeeNumber.value,
         designation: designation.value
-      })
-      .then(() => {
-        console.log('recorded?');
+      });
+      alert('user was created!');
+      router.push('clientView');
+      console.log('recorded!');
+
+      // .then(() => {
+      //   console.log('recorded?');
+      //   alert('user was created!');
         
-      })
-      .catch((error) => {
-        alert('Error:', error);
-      })
+      // })
+      // .catch((error) => {
+      //   alert('Error:', error);
+      // })
     }
         
     return { logout, 
