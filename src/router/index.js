@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import Register from '../views/Register.vue';
 import Portal from '../views/Portal.vue';
 import ClientView from '../views/ClientView.vue';
+import Details from '../views/Details.vue';
 import { getUserState } from '@/firebase';
 
 
@@ -26,6 +27,11 @@ const routes = [
     path: '/clientView',
     name: 'clientView',
     component: ClientView    
+  },
+  {
+    path: '/details',
+    name: 'details',
+    component: Details
   }
  
 ]
