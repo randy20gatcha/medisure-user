@@ -29,9 +29,10 @@ const routes = [
     component: ClientView    
   },
   {
-    path: '/details',
+    path: '/details/:userId',
     name: 'details',
-    component: Details
+    component: Details,
+    
   }
  
 ]

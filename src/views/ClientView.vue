@@ -16,7 +16,7 @@
               <tr>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.designation }}</td>
-                <td><router-link :to="{ path: '/details' }">Details</router-link></td>
+                <td><router-link :to="{ path: `/details/${ user.id }` }">Details</router-link></td>
               </tr>
             </tbody>
         </table>  
