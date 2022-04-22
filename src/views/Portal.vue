@@ -30,6 +30,11 @@
                 <input type="file" id="choose-file" size="80" v-on:change="chooseFile"/>
               </div>
             </div>
+            <div class="horizontal-group">
+              <div class="form-group right" >
+                <qrcode-vue v-if="employeeNumber" :value="employeeNumber"  level="H"/>
+              </div>
+            </div>
 
         </div>            
       </div>
@@ -47,8 +52,7 @@ import router from '@/router';
 import { ref } from 'vue';
 import { addDoc } from '@firebase/firestore';
 import { employees } from '@/firebase';
-
-
+import QrcodeVue from 'qrcode.vue';
 
 export default {
   setup() {
@@ -57,6 +61,7 @@ export default {
     const lastName = ref();
     const employeeNumber = ref();
     const designation = ref();
+    
        
     const logout = () => {
       signOut(auth).then(() => {
@@ -94,7 +99,11 @@ export default {
     lastName, 
     employeeNumber, 
     designation, 
+    
     onSubmit };
+  },
+  components: {
+    QrcodeVue
   }
 
 }

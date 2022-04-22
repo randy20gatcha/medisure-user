@@ -40,17 +40,38 @@ export default {
       }
     },
     methods: {
+      oldGetData() {
+        getDocs(employees).then(fetchData => {
+          console.log("1");
+          let users = [];
+          fetchData.forEach((user) => {
+            let userId = user.data();
+            userId.id = user.id;
+            users.push(userId);
+          })
+          console.log(users);
+          this.users = users;
+        }).catch(reason => {
+          console.error(reason);
+        });
+        console.log("2");
+      },
+
       async getData() {
-        const fetchData = await getDocs(employees);
-        let users = [];
-        fetchData.forEach((user) => {
-          let userId = user.data();
-          userId.id = user.id;
-          users.push(userId);
-          
-        })
-        console.log(users);
-        this.users = users;
+        try {
+          const fetchData = await getDocs(employees);
+          let users = [];
+          fetchData.forEach((user) => {
+            let userId = user.data();
+            userId.id = user.id;
+            users.push(userId);
+            
+          })
+          console.log(users);
+          this.users = users;
+        } catch (err) {
+          console.error(err);
+        }
       }
     },
     created() {

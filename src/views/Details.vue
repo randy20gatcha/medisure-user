@@ -8,7 +8,8 @@
         <div class="container">
           <h2>{{ firstName}} {{ lastName }}</h2>
           <p>{{ designation }}</p>
-          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>Employee Number: {{ employeeNumber }}</p>
+           <qrcode-vue v-if="employeeNumber" :value="employeeNumber"  level="H"/>
           <p>example@example.com</p>
           <p><button class="button">click</button></p>
         </div>
@@ -21,7 +22,8 @@
 
 <script>
 import { employees } from '@/firebase';
-import { getDoc, doc, setDoc } from 'firebase/firestore'
+import { getDoc, doc, setDoc } from 'firebase/firestore';
+import  QrcodeVue  from 'qrcode.vue';
 export default {
   data() {
     return {      
@@ -29,7 +31,8 @@ export default {
       docRef: null,
       firstName: null,
       lastName: null,
-      designation: null
+      designation: null,
+      employeeNumber: null
     }
   },
   methods: {
@@ -41,12 +44,16 @@ export default {
       this.firstName = userData.firstName;
       this.lastName = userData.lastName;
       this.designation = userData.designation;
+      this.employeeNumber = userData.employeeNumber;
     }
   },
   created() {
     let userId = this.$route.params.userId;
     this.userId = userId;
     this.getUser();
+  },
+  components: {
+    QrcodeVue
   }
   
 }
