@@ -9,9 +9,10 @@
           <h2>{{ firstName}} {{ lastName }}</h2>
           <p>{{ designation }}</p>
           <p>Employee Number: {{ employeeNumber }}</p>
+          <p>medisure-hr@medisure.com</p>
+          <p>mobile number: 09172346789</p>
            <qrcode-vue v-if="employeeNumber" :value="employeeNumber"  level="H"/>
-          <p>example@example.com</p>
-          <p><button class="button">click</button></p>
+         
         </div>
       </div>
     </div>
@@ -51,6 +52,7 @@ export default {
     let userId = this.$route.params.userId;
     this.userId = userId;
     this.getUser();
+    console.log('created');
   },
   components: {
     QrcodeVue

@@ -26,16 +26,14 @@
             </div>
             <div class="horizontal-group">
               <div class="form-group left" >
-                <label for="choose-file" class="label-title">Upload Profile Picture</label>
-                <input type="file" id="choose-file" size="80" v-on:change="chooseFile"/>
+                <label for="file">Upload photo</label>
+                <input type="file" @change="previewImage" accept="image"> 
               </div>
-            </div>
-            <div class="horizontal-group">
-              <div class="form-group right" >
-                <qrcode-vue v-if="employeeNumber" :value="employeeNumber"  level="H"/>
-              </div>
-            </div>
+              <!-- <div class="form-group right" v-if="imageData != null">
+               <img :src="img" alt="picture" class="preview">
+              </div> -->
 
+            </div>           
         </div>            
       </div>
       <div class="form-footer">        
@@ -51,17 +49,18 @@ import { getAuth, signOut } from 'firebase/auth';
 import router from '@/router';
 import { ref } from 'vue';
 import { addDoc } from '@firebase/firestore';
+import { getStorage, ref as storageReference, uploadBytes } from 'firebase/storage';
 import { employees } from '@/firebase';
-import QrcodeVue from 'qrcode.vue';
 
 export default {
   setup() {
+    
     const auth = getAuth();
     const firstName = ref();
     const lastName = ref();
     const employeeNumber = ref();
     const designation = ref();
-    
+    const uploadTask = ref(null);    
        
     const logout = () => {
       signOut(auth).then(() => {
@@ -82,28 +81,25 @@ export default {
       });
       alert('user was created!');
       router.push('clientView');
-      console.log('recorded!');
-
-      // .then(() => {
-      //   console.log('recorded?');
-      //   alert('user was created!');
-        
-      // })
-      // .catch((error) => {
-      //   alert('Error:', error);
-      // })
+      console.log('recorded!');  
     }
-        
-    return { logout, 
-    firstName, 
-    lastName, 
-    employeeNumber, 
-    designation, 
+
+    //Upload photo...
+    const previewImage = (event) => {
+      const storage = getStorage();
+      const storageRef = storageReference(storage, 'public/myfile');
+      uploadTask.value = uploadBytes(storageRef, event.target.files[0])
+    }
     
-    onSubmit };
-  },
-  components: {
-    QrcodeVue
+ 
+    return { logout,  
+            firstName, 
+            lastName, 
+            employeeNumber, 
+            designation, 
+            onSubmit,
+            previewImage,
+           };
   }
 
 }
@@ -231,5 +227,9 @@ a {
 a:hover {
   background-color: rgb(161, 161, 201);
   color: white;
+}
+#uploadPic {  
+  width: 150px;
+  text-align: center;
 }
 </style>

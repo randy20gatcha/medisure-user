@@ -29,7 +29,7 @@
 <script>
 import { ref } from '@vue/reactivity';
 import { getDocs } from 'firebase/firestore';
-import { employees, getUsers, useLoadUsers } from '@/firebase';
+import { employees } from '@/firebase';
 
 export default {  
     name: "clientView",
@@ -75,7 +75,8 @@ export default {
       }
     },
     created() {
-      this.getData();
+       this.getData();
+      //this.oldGetData();
     }
    
 }
