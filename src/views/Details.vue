@@ -6,7 +6,7 @@
       <div class="card">
         <img src="@/assets/logo.png" alt="picture">
         <div class="container">
-          <h2>{{ firstName}} {{ lastName }}</h2>
+          <h2>{{ firstName }} {{ lastName }}</h2>
           <p>{{ designation }}</p>
           <p>Employee Number: {{ employeeNumber }}</p>
           <p>medisure-hr@medisure.com</p>
@@ -21,12 +21,15 @@
 
 </template>
 
-<script>
+<script >
 import { employees } from '@/firebase';
 import { getDoc, doc, setDoc } from 'firebase/firestore';
-import  QrcodeVue  from 'qrcode.vue';
+import { getStorage, ref as storageReference, getDownloadURL } from 'firebase/storage';
+import   QrcodeVue  from 'qrcode.vue';
+import { ref } from '@vue/reactivity';
+
 export default {
-  data() {
+ data() {
     return {      
       userId: null,
       docRef: null,
@@ -46,18 +49,23 @@ export default {
       this.lastName = userData.lastName;
       this.designation = userData.designation;
       this.employeeNumber = userData.employeeNumber;
-    }
+    },
+    getImage() {
+      const storage = getStorage();
+      const pathRef = storageReference(storage, 'public/');
+      
+    } 
   },
   created() {
     let userId = this.$route.params.userId;
     this.userId = userId;
     this.getUser();
+    this.getImage();
     console.log('created');
   },
   components: {
     QrcodeVue
   }
-  
 }
 </script>
 

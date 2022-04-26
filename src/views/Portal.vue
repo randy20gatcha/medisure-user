@@ -86,9 +86,10 @@ export default {
 
     //Upload photo...
     const previewImage = (event) => {
+      const file = event.target.files[0];
       const storage = getStorage();
-      const storageRef = storageReference(storage, 'public/myfile');
-      uploadTask.value = uploadBytes(storageRef, event.target.files[0])
+      const storageRef = storageReference(storage, 'public/' + file.name);
+      uploadTask.value = uploadBytes(storageRef, file)
     }
     
  
