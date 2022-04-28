@@ -4,14 +4,16 @@
   <div class="row">
     <div class="column">
       <div class="card">
-        <img src="@/assets/logo.png" alt="picture">
+        <div>
+        <img :src="img" alt="picture" id="myImg">
+        </div>
         <div class="container">
           <h2>{{ firstName }} {{ lastName }}</h2>
           <p>{{ designation }}</p>
           <p>Employee Number: {{ employeeNumber }}</p>
           <p>medisure-hr@medisure.com</p>
-          <p>mobile number: 09172346789</p>
-           <qrcode-vue v-if="employeeNumber" :value="employeeNumber"  level="H"/>
+          <p>HR mobile number: 09172346789</p>
+           <qrcode-vue v-if="userId" :value="userId"  level="H"/>
          
         </div>
       </div>
@@ -29,6 +31,9 @@ import   QrcodeVue  from 'qrcode.vue';
 import { ref } from '@vue/reactivity';
 
 export default {
+  components: {
+    QrcodeVue
+  },
  data() {
     return {      
       userId: null,
@@ -36,11 +41,13 @@ export default {
       firstName: null,
       lastName: null,
       designation: null,
-      employeeNumber: null
+      employeeNumber: null,
+      //image: ''
     }
   },
   methods: {
     async getUser () {
+
       let userRef = doc(employees, this.userId);
       this.docRef = userRef;
       let user = await getDoc(this.docRef);
@@ -49,11 +56,22 @@ export default {
       this.lastName = userData.lastName;
       this.designation = userData.designation;
       this.employeeNumber = userData.employeeNumber;
+      //this.image = userData.image;
     },
-    getImage() {
-      const storage = getStorage();
-      const pathRef = storageReference(storage, 'public/');
+    getImage() {     
       
+      const storage = getStorage();
+      const pathRef = storageReference(storage, 'public/Randy.jpg' );
+      getDownloadURL(pathRef).then((url) => {
+          const image = document.getElementById('myImg');
+          image.setAttribute('src', url);
+      })
+      .catch((error) => {
+        alert(error.meesage);
+      })
+      
+      //console.log(pathRef);
+ 
     } 
   },
   created() {
@@ -63,9 +81,7 @@ export default {
     this.getImage();
     console.log('created');
   },
-  components: {
-    QrcodeVue
-  }
+ 
 }
 </script>
 
@@ -94,7 +110,7 @@ img {
 .card {
  height: 700px;
  position: absolute;
- top: 63%;
+ top: 58%;
  left: 50%;
  transform: translate(-50%, -50%);
 }

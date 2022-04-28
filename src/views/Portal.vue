@@ -27,17 +27,17 @@
             <div class="horizontal-group">
               <div class="form-group left" >
                 <label for="file">Upload photo</label>
-                <input type="file" @change="previewImage" accept="image"> 
+                <input type="file" @change="previewImage" accept="image"/> 
               </div>
-              <!-- <div class="form-group right" v-if="imageData != null">
-               <img :src="img" alt="picture" class="preview">
+              <!-- <div class="form-group right" >
+                <img src="" alt="" id="image">
               </div> -->
 
             </div>           
         </div>            
       </div>
       <div class="form-footer">        
-          <button type="submit" class="btn" >Create</button>      
+          <button type="submit" class="button" >Create</button>      
       </div>
     </form>    
   </div>
@@ -47,9 +47,9 @@
 <script>
 import { getAuth, signOut } from 'firebase/auth';
 import router from '@/router';
-import { ref } from 'vue';
-import { addDoc } from '@firebase/firestore';
-import { getStorage, ref as storageReference, uploadBytes } from 'firebase/storage';
+import { ref, toRef } from 'vue';
+import { doc, addDoc } from 'firebase/firestore';
+import { getStorage, ref as storageReference, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { employees } from '@/firebase';
 
 export default {
@@ -60,46 +60,52 @@ export default {
     const lastName = ref();
     const employeeNumber = ref();
     const designation = ref();
-    const uploadTask = ref(null);    
-       
+    
+    
+        
     const logout = () => {
       signOut(auth).then(() => {
         console.log('signed out');
         router.push('/');
       })
       .catch(error => {
-        console.log(error.message);
+        console.log(error.message);cd
       })
     }
     // working... pushing data to firestore
     const onSubmit = async () => {
+      
       await addDoc(employees, {
         firstName: firstName.value,
         lastName: lastName.value,
         employeeNumber: employeeNumber.value,
-        designation: designation.value
+        designation: designation.value,
+        
       });
       alert('user was created!');
       router.push('clientView');
       console.log('recorded!');  
     }
 
-    //Upload photo...
-    const previewImage = (event) => {
+     //Upload photo...
+    const previewImage =  (event) => {
       const file = event.target.files[0];
       const storage = getStorage();
-      const storageRef = storageReference(storage, 'public/' + file.name);
-      uploadTask.value = uploadBytes(storageRef, file)
+      const storageRef = storageReference(storage, 'public/' + file.name); 
+       uploadBytes (storageRef, file).then((snapshot) => {
+         console.log('uploaded');
+       })
+       console.log('upload first', file.name);
+  
     }
-    
- 
+
     return { logout,  
             firstName, 
             lastName, 
             employeeNumber, 
             designation, 
             onSubmit,
-            previewImage,
+            previewImage
            };
   }
 
@@ -203,7 +209,7 @@ input[type="file"] {
   font-weight: thin;
 }
 
-.btn {
+.button {
    display:inline-block;
    padding:10px 10px;
    background-color: #1BBA93;
@@ -214,7 +220,7 @@ input[type="file"] {
    cursor:pointer;
 }
 
-.btn:hover {
+.button:hover {
   background-color: #169c7b;
   color:white;
 }

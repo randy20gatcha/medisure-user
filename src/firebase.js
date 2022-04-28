@@ -53,12 +53,12 @@ export const useAuthState = () => {
   return { user, error, isAuthenticated }
 }
 
-export const useLoadUsers = () => {
-  const users = ref([]);
-  const close = employees.onSnapshot(snapshot => {
-    users.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-  });
-  onUnmounted(close);
-  return users;
-}
+// export const useLoadUsers = () => {
+//   const users = ref([]);
+//   const close = employees.onSnapshot(snapshot => {
+//     users.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+//   });
+//   onUnmounted(close);
+//   return users;
+// }
  
