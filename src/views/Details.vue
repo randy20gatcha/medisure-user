@@ -58,7 +58,7 @@ export default {
       this.employeeNumber = userData.employeeNumber;
       this.image = this.photoUrl;
       // value provider for qr code
-      this.str = 'http://localhost:8080/details/' + this.userId; 
+      this.str = 'https://medisure-crud.web.app/details/' + this.userId; 
       console.log(this.str);
     },
     //  getImage() {    
