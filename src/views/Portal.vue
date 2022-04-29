@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Portal</h1>
     <router-link to="clientView">List</router-link>
-    <form class="signup-form" @submit.prevent="onSubmit">
+     <form class="signup-form" @submit.prevent="onSubmit"> <!--@submit.prevent="onSubmit" -->
       <div class="form-header">
         <h1>Employee Enrolment</h1>
       </div>
@@ -60,9 +60,8 @@ export default {
     const lastName = ref();
     const employeeNumber = ref();
     const designation = ref();
+    const photoUrl = ref();
     
-    
-        
     const logout = () => {
       signOut(auth).then(() => {
         console.log('signed out');
@@ -74,14 +73,15 @@ export default {
     }
     // working... pushing data to firestore
     const onSubmit = async () => {
-      
-      await addDoc(employees, {
+      const test = {
         firstName: firstName.value,
         lastName: lastName.value,
         employeeNumber: employeeNumber.value,
         designation: designation.value,
-        
-      });
+        photoUrl: photoUrl.value  
+      };
+      //console.log(test);
+      await addDoc(employees, test);
       alert('user was created!');
       router.push('clientView');
       console.log('recorded!');  
@@ -91,19 +91,26 @@ export default {
     const previewImage =  (event) => {
       const file = event.target.files[0];
       const storage = getStorage();
-      const storageRef = storageReference(storage, 'public/' + file.name); 
-       uploadBytes (storageRef, file).then((snapshot) => {
-         console.log('uploaded');
-       })
-       console.log('upload first', file.name);
-  
-    }
+      const storageRef = storageReference(storage, 'public/' + file.name); // include in addDoc
+      uploadBytes (storageRef, file).then((snapshot) => {
+        console.log('uploaded');
+        getDownloadURL(storageRef).then((url) => {
+          photoUrl.value = url;
+          console.log(url);  
+        })
+        .catch((error) => {
+        alert(error.meesage);
+        })
+      })
+     console.log('upload first', file.name);
+  }
 
     return { logout,  
             firstName, 
             lastName, 
             employeeNumber, 
             designation, 
+            photoUrl,
             onSubmit,
             previewImage
            };
