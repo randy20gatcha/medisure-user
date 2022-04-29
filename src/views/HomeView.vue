@@ -2,7 +2,7 @@
   <div class="home">
     <nav>
      <!-- <router-link to="register">Register</router-link> -->
-     <a v-bind:href="name">Register</a>
+     <!-- <a v-bind:href="name">Register</a> -->
     </nav>
     <LoginAdmin />
   </div>
