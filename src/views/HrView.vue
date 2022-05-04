@@ -16,7 +16,7 @@
               <tr>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.designation }}</td>
-                <td><router-link :to="{ path: `/details/${ user.id }` }">Details</router-link></td>
+                <td><router-link :to="{ path: `/forCompany/${ user.id }` }">Details</router-link></td>
               </tr>
             </tbody>
         </table>  
@@ -32,7 +32,7 @@ import { getDocs } from 'firebase/firestore';
 import { employees } from '@/firebase';
 
 export default {  
-    name: "clientView",
+    name: "hrView",
     components: {},
     data() {
       return {

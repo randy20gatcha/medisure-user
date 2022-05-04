@@ -33,25 +33,25 @@ export const getUserState = () =>
     onAuthStateChanged(getAuth(), resolve, reject)
   )
 
-export const useAuthState = () => {
-  const user = ref(null)
-  const error = ref(null)
+// export const useAuthState = () => {
+//   const user = ref(null)
+//   const error = ref(null)
 
  
-  let unsubscribe
-  onMounted(() => {
-    unsubscribe = onAuthStateChanged(
-      auth,
-      u => (user.value = u),
-      e => (error.value = e)
-    )
-  })
-  onUnmounted(() => unsubscribe())
+//   let unsubscribe
+//   onMounted(() => {
+//     unsubscribe = onAuthStateChanged(
+//       auth,
+//       u => (user.value = u),
+//       e => (error.value = e)
+//     )
+//   })
+//   onUnmounted(() => unsubscribe())
 
-  const isAuthenticated = computed(() => user.value != null)
+//   const isAuthenticated = computed(() => user.value != null)
 
-  return { user, error, isAuthenticated }
-}
+//   return { user, error, isAuthenticated }
+// }
 
 // export const useLoadUsers = () => {
 //   const users = ref([]);

@@ -1,6 +1,5 @@
 <template>
 <div class="container">
-  <h1>Details</h1>
   <div class="row">
     <div class="column">
       <div class="card">
@@ -8,12 +7,14 @@
         <img :src="image" alt="picture" id="myImg">
         </div>
         <div class="container">
-          <h2>{{ firstName }} {{ lastName }}</h2>
+          <h2 ><p>{{ firstName }} {{ lastName }}</p></h2>
           <p>{{ designation }}</p>
           <p>Employee Number: {{ employeeNumber }}</p>
           <p>medisure-hr@medisure.com</p>
           <p>HR mobile number: 09172346789</p>
+          <div >
            <qrcode-vue v-if="str" :value="str"  level="H"/> 
+          </div>
         </div>
       </div>
     </div>
@@ -23,17 +24,17 @@
 
 <script >
 import { employees } from '@/firebase';
-import { getDoc, doc, setDoc } from 'firebase/firestore';
-//import { getStorage, ref as storageReference, getDownloadURL } from 'firebase/storage';
+import { getDoc, doc } from 'firebase/firestore';
+import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import   QrcodeVue  from 'qrcode.vue';
-//import { ref } from '@vue/reactivity';
 
 export default {
+  name: "ForCompany",
   components: {
     QrcodeVue
   },
   data() {
-    return {      
+    return {       
       userId: null,
       docRef: null,
       firstName: null,
@@ -42,11 +43,11 @@ export default {
       employeeNumber: null,
       photoUrl: null,
       image: null,
-      str: null
+      str: null     
     }
   },
   methods: {
-    async getUser () {
+    async getUser() {
       let userRef = doc(employees, this.userId);
       this.docRef = userRef;  
       let user = await getDoc(this.docRef);
@@ -58,23 +59,46 @@ export default {
       this.employeeNumber = userData.employeeNumber;
       this.image = this.photoUrl;
       // value provider for qr code
-      this.str = 'https://medisure-crud.web.app/details/' + this.userId; 
-      console.log(this.str);
+      this.str = 'http://192.168.1.4:8080/forClient/' + this.userId;  
+      //console.log(this.str)  
+    }, 
+    noSignIn() {
+      const auth = getAuth();
+      signInAnonymously(auth).then(() => {
+        console.log('signed in anonymously');
+        if(auth) {
+          //console.log('not shown in public');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     },
-    //  getImage() {    
-    //    const storage = getStorage();
-    //    const pathRef = storageReference(storage, 'public' );  
-    //    const image = document.getElementById('myImg');
-    //    //image.setAttribute('src', this.photoUrl);
-    //    console.log(pathRef);
-    //  } 
+    userStatus() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid;
+          //console.log('state changed:',uid);
+        } else {
+          console.log('signed out');
+        }
+      });
+    },
+    // regulate() {
+    //   if(this.noSignIn) {
+    //     console.log('not logged in');
+    //   }
+    // } 
   },
   created() {
     let userId = this.$route.params.userId;
     this.userId = userId; 
     this.getUser();
-    //this.getImage();
-    console.log('created');
+    this.noSignIn();
+    this.userStatus();
+    // //console.log('created');
+    // this.regulate();
   },
 }
 </script>

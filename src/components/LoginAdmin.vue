@@ -10,8 +10,7 @@
             <div class="div">
              <label for="password">Password:</label>
              <input type="password" v-model="password"  placeholder="password" required/>
-            </div>
-           
+            </div>  
             <button @click.prevent="signIn">Login</button>
         </form>        
     </div>
@@ -32,8 +31,8 @@ export default {
      const signIn = () => {
          signInWithEmailAndPassword(auth, email.value, password.value)
          .then((cred) => {  
-          console.log('active',cred.user)
-        router.push('/portal');
+          console.log('active',cred.user);
+          router.push('/portal');
       })
       .catch(error => {
         alert('Please fill in username and password.',error.message);   

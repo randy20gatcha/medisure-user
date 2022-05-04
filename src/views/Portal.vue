@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Portal</h1>
-    <router-link to="clientView">List</router-link>
+    <router-link to="hrView">List</router-link>
      <form class="signup-form" @submit.prevent="onSubmit"> <!--@submit.prevent="onSubmit" -->
       <div class="form-header">
         <h1>Employee Enrolment</h1>
@@ -83,7 +83,7 @@ export default {
       //console.log(test);
       await addDoc(employees, test);
       alert('user was created!');
-      router.push('clientView');
+      router.push('hrView');
       console.log('recorded!');  
     }
 
