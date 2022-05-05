@@ -68,7 +68,7 @@ export default {
         router.push('/');
       })
       .catch(error => {
-        console.log(error.message);cd
+        console.log(error.message);
       })
     }
     // working... pushing data to firestore

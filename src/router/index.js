@@ -46,11 +46,11 @@ const router = createRouter({
   routes
 });
 
-// router.beforeEach(async (to, from) => {
-//   const isAuth = await getUserState();
-//    if(!isAuth && to.name !== 'home') {
-//      return { name: 'portal'}
-//    } 
-// })
+router.beforeEach(async (to, from) => {
+  const isAuth = await getUserState();
+   if(!isAuth && from.name === 'home') {
+     return { name: 'home'}
+   } 
+})
 
 export default router

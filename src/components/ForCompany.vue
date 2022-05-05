@@ -13,7 +13,7 @@
           <p>medisure-hr@medisure.com</p>
           <p>HR mobile number: 09172346789</p>
           <div >
-           <qrcode-vue v-if="str" :value="str"  level="H"/> 
+           <qrcode-vue v-if="str" :value="str"  level="H" id="noQr"/> 
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default {
       employeeNumber: null,
       photoUrl: null,
       image: null,
-      str: null     
+      str: null,  
     }
   },
   methods: {
@@ -59,7 +59,7 @@ export default {
       this.employeeNumber = userData.employeeNumber;
       this.image = this.photoUrl;
       // value provider for qr code
-      this.str = 'http://192.168.1.4:8080/forClient/' + this.userId;  
+      this.str = 'https://medisure-crud.web.app/forClient/' + this.userId;  
       //console.log(this.str)  
     }, 
     noSignIn() {
@@ -85,11 +85,14 @@ export default {
         }
       });
     },
-    // regulate() {
-    //   if(this.noSignIn) {
-    //     console.log('not logged in');
-    //   }
-    // } 
+    // noShowQr() {
+    //   let hideQr = this.str;
+    //   console.log('this one:',hideQr);
+    //   let hide = document.getElementById('noQR');
+    //   if(hideQr) {
+    //     hide.style.visibility = 'hidden'; 
+    //   }   
+    // }
   },
   created() {
     let userId = this.$route.params.userId;
@@ -97,8 +100,8 @@ export default {
     this.getUser();
     this.noSignIn();
     this.userStatus();
-    // //console.log('created');
-    // this.regulate();
+   //this.noShowQr();
+   //console.log('created');
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <router-view />
+  <router-view /> 
 </template>
 
 <script>
@@ -29,4 +29,5 @@ nav a {
   color: #2c3e50;
   text-decoration: none;
 }
+
 </style>

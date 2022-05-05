@@ -16,12 +16,13 @@ const firebaseConfig = {
 
 // get db
  const db = getFirestore(app);
-
+ const auth = getAuth(app);
  
 
 // initialize services
 export const employees = collection(db,'users');
 
+// for updating employee details
 export const getUsers =  (id) => {
   const user =  employees.doc(id).get();
   return user.exists ? user.data : null;
@@ -30,7 +31,7 @@ export const getUsers =  (id) => {
 // To initialize user state, whether auth or not  
 export const getUserState = () =>
   new Promise((resolve, reject) =>
-    onAuthStateChanged(getAuth(), resolve, reject)
+    onAuthStateChanged(auth, resolve, reject)
   )
 
 // export const useAuthState = () => {
