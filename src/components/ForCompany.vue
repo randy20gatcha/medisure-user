@@ -25,9 +25,7 @@
 <script >
 import { employees } from '@/firebase';
 import { getDoc, doc } from 'firebase/firestore';
-import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import   QrcodeVue  from 'qrcode.vue';
-
 export default {
   name: "ForCompany",
   components: {
@@ -62,50 +60,15 @@ export default {
       this.str = 'https://medisure-crud.web.app/forClient/' + this.userId;  
       //console.log(this.str)  
     }, 
-    noSignIn() {
-      const auth = getAuth();
-      signInAnonymously(auth).then(() => {
-        console.log('signed in anonymously');
-        if(auth) {
-          //console.log('not shown in public');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    },
-    userStatus() {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const uid = user.uid;
-          //console.log('state changed:',uid);
-        } else {
-          console.log('signed out');
-        }
-      });
-    },
-    // noShowQr() {
-    //   let hideQr = this.str;
-    //   console.log('this one:',hideQr);
-    //   let hide = document.getElementById('noQR');
-    //   if(hideQr) {
-    //     hide.style.visibility = 'hidden'; 
-    //   }   
-    // }
   },
   created() {
     let userId = this.$route.params.userId;
     this.userId = userId; 
     this.getUser();
-    this.noSignIn();
-    this.userStatus();
-   //this.noShowQr();
    //console.log('created');
   },
 }
 </script>
-
 <style scoped>
 body {
     background-color: #eee

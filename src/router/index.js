@@ -7,12 +7,11 @@ import ForCompany from '../components/ForCompany.vue';
 import ForClient from '../components/ForClient.vue';
 import { getUserState } from '@/firebase';
 
-
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView    
+    component: HomeView
   },
   {
     path: '/register',
