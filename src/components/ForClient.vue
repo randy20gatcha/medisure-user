@@ -33,8 +33,7 @@ export default {
       designation: null,
       employeeNumber: null,
       photoUrl: null,
-      image: null,
-      str: null,  
+      image: null  
     }
   },
   methods: {
@@ -61,20 +60,6 @@ export default {
 }
 </script>
 
-<style scoped>
-img {
-  width: 100px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  border-radius: 50%;
-}
-.container {
-    height: 100vh;
-}
-.card {
-    width: 400px;
-    border: none
-}
+<style>
+
 </style>  
