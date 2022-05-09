@@ -25,13 +25,16 @@
 <script >
 import { employees } from '@/firebase';
 import { getDoc, doc } from 'firebase/firestore';
+import { ref } from 'vue';
 import   QrcodeVue  from 'qrcode.vue';
+import { useRoute } from 'vue-router';
+
 export default {
   name: "ForCompany",
   components: {
     QrcodeVue
   },
-  data() {
+ data() {
     return {       
       userId: null,
       docRef: null,
@@ -69,10 +72,10 @@ export default {
   },
 }
 </script>
-<style scoped>
-body {
+<style>
+/* body {
     background-color: #eee
-}
+} */
 .container {
     height: 100vh
 }
