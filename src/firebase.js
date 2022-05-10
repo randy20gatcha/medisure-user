@@ -12,13 +12,22 @@ const firebaseConfig = {
     messagingSenderId: "943820419606",
     appId: "1:943820419606:web:70bcae12737b605be67b37"
   };
- const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // get db
  const db = getFirestore(app);
  const auth = getAuth(app);
- 
 
+ // Property provider for Company and Client
+ export const provider = {
+    userId: null,
+    docRef: null,
+    firstName: null,
+    lastName: null,
+    designation: null,
+    employeeNumber: null,
+    str: null,
+ }
 // initialize services
 export const employees = collection(db,'users');
 

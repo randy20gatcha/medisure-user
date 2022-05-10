@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <h1>Portal</h1>
     <router-link to="hrView">List</router-link>
      <form class="signup-form" @submit.prevent="onSubmit"> <!--@submit.prevent="onSubmit" -->

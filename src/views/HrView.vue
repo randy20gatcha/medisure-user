@@ -56,10 +56,7 @@ export default {
           console.error(err);
         }
       },
-      // deleteStaff() {
-      //   let users = [];
-      //   let userDelete = employees.doc(userId).delete();  
-      // }   
+       
     },
   created() {
        this.getData();
