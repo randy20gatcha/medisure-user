@@ -22,7 +22,7 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { ref } from 'vue';
 import router from '@/router';
-export default {
+export default ({
  setup() {
      const auth = getAuth();
      const email = ref("");
@@ -40,7 +40,7 @@ export default {
      }
      return { email, password, signIn }
   }
-}
+})
 </script>
 
 <style>

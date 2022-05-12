@@ -52,7 +52,7 @@ import { doc, addDoc } from 'firebase/firestore';
 import { getStorage, ref as storageReference, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { employees } from '@/firebase';
 
-export default {
+export default ({
   setup() {
     
     const auth = getAuth();
@@ -116,7 +116,7 @@ export default {
            };
   }
 
-}
+})
 </script>
 
 <style scoped>

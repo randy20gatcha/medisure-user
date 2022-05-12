@@ -12,10 +12,10 @@
 // @ is an alias to /src
 import LoginAdmin from '@/components/LoginAdmin.vue';
 
-export default {  
+export default ({  
   name: 'HomeView',
   components: {
     LoginAdmin 
   } 
-}
+})
 </script>
