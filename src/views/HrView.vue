@@ -12,7 +12,7 @@
                   <th>Details</th>
                 </tr>
             </thead>
-            <tbody v-for=" user in users " :key="user">
+            <tbody v-for=" user in users " :key="user.id">
               <tr>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.designation }}</td>
@@ -28,16 +28,16 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
+import { ref, onMounted } from 'vue';
 import { getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { employees } from '@/firebase';
 
-export default {  
+export default ({  
   name: "hrView",
   data() {
       return {
-        users: []
-      }
+        users: []   
+      } 
     },
    methods: {
       async getData() {
@@ -48,7 +48,6 @@ export default {
             let userId = user.data();
             userId.id = user.id;
             users.push(userId);
-            
           })
           console.log(users);
           this.users = users;
@@ -63,7 +62,7 @@ export default {
        //this.deleteStaff();
       //this.oldGetData();
     }
-}
+})
 </script>
 
 <style scoped>

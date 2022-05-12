@@ -1,7 +1,8 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { useRoute } from 'vue-router';
 
 
 const firebaseConfig = {
@@ -18,30 +19,28 @@ const app = initializeApp(firebaseConfig);
  const db = getFirestore(app);
  const auth = getAuth(app);
 
- // Property provider for Company and Client
- export const provider = {
-    userId: null,
-    docRef: null,
-    firstName: null,
-    lastName: null,
-    designation: null,
-    employeeNumber: null,
-    str: null,
- }
 // initialize services
-export const employees = collection(db,'users');
+export const employees = collection(db,"users");
 
-// for updating employee details
-export const getUsers =  (id) => {
-  const user =  employees.doc(id).get();
-  return user.exists ? user.data : null;
-}
 
 // To initialize user state, whether auth or not  
 export const getUserState = () =>
   new Promise((resolve, reject) =>
     onAuthStateChanged(auth, resolve, reject)
   )
+
+export const getUser = async id => {
+  const user = await employees.doc(id).get();
+  return user.exists ? user.data() : null
+}
+
+// for updating employee details
+// export const getUsers =  (id) => {
+//   const user =  employees.doc(id).get();
+//   return user.exists ? user.data : null;
+// }
+
+
 
 // export const useAuthState = () => {
 //   const user = ref(null)
@@ -64,11 +63,11 @@ export const getUserState = () =>
 // }
 
 // export const useLoadUsers = () => {
-//   const users = ref([]);
+//   const users = ref([])
 //   const close = employees.onSnapshot(snapshot => {
-//     users.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-//   });
-//   onUnmounted(close);
-//   return users;
+//     users.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}))
+//   })
+//   onUnmounted(close)
+//   return users
 // }
  
