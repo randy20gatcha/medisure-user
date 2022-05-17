@@ -4,7 +4,7 @@
     <div class="column">
       <div class="card">
         <div>
-        <img :src="store.image" alt="picture" id="myImg">
+        <img :src="store.photoUrl" alt="picture" id="myImg">
         </div>
         <div class="container">
           <h2 ><p>{{ store.firstName }} {{ store.lastName }}</p></h2>
@@ -27,6 +27,7 @@
 <script >
 import { useStore } from '@/stores/userStore';
 import   QrcodeVue  from 'qrcode.vue';
+
 export default ({
   name: "ForCompany",
   components: {

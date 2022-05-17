@@ -11,8 +11,8 @@ export const useStore = defineStore("userStore", {
         designation: '',
         employeeNumber: '',
         photoUrl: '',
-        image: '',
-        str: ''
+       // image: '',  
+        str: '',
     }),
     actions: {
         fill() {
@@ -24,11 +24,11 @@ export const useStore = defineStore("userStore", {
             this.photoUrl = userRef.photoUrl
             this.firstName = userRef.firstName;
             this.lastName = userRef.lastName;
-            this.designation = userRef.designation
+            this.designation = userRef.designation;
             this.employeeNumber = userRef.employeeNumber;
-            this.image = userRef.photoUrl;
+           // this.image = userRef.photoUrl;
             this.str = 'http://192.168.1.4:8080/forClient/' + userId;
-            })
+            })  
         }
     }
 });
