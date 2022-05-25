@@ -1,6 +1,7 @@
 <template>
 <nav>
   <router-link :to="{ path: `/portal` }" class="toPortal">Create</router-link>
+    <h4>Medi<span>Sure</span><sup>Plus</sup></h4>
    <button @click="logout" id="logout">Logout</button>
 </nav>
 <div>
@@ -83,8 +84,9 @@ export default ({
 </script>
 
 <style scoped>
-h1 {
+h2 {
   margin-top: 10px;
+  color: #ffffff;
 }
 a {
   background-color: rgb(69, 69, 128);

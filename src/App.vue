@@ -14,15 +14,17 @@
   text-align: center;
   color: #2c3e50;
 }
-
 body {
     background-color: #558b2f;
     padding: 0;
     margin: 0;    
 }
 nav {
-  padding: 20px;
-  background-color: rgb(112, 110, 110);
+  padding: 15px;
+  background-color: rgb(156, 153, 153);
+}
+h4 {
+  margin: -10px;
 }
 nav a {
   font-weight: bold;

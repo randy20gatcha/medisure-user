@@ -72,6 +72,7 @@ input {
   font-family: "Roboto", sans-serif;
   width:500px;
   margin:20px auto;
+  margin-top: 150px;
   background:linear-gradient(to right, #e6e3e3 0%, #ebe8e8 50%, #f0ecec 99%);
   border-radius: 10px;
 }

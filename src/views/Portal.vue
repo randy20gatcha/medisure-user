@@ -1,6 +1,7 @@
 <template>
   <nav id="hrview">
     <a href="hrView" class="toList">List</a>
+    <h4>Medi<span>Sure</span><sup>Plus</sup></h4>
     <button @click="logout" id="logout">Logout</button>
   </nav>
    <h2>Portal</h2>
