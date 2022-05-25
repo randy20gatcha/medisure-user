@@ -1,8 +1,11 @@
 <template>
+  <nav id="hrview">
+    <a href="hrView" class="toList">List</a>
+    <button @click="logout" id="logout">Logout</button>
+  </nav>
+   <h2>Portal</h2>
   <div class="container-fluid">
-    <h1>Portal</h1>
-    <router-link to="hrView">List</router-link>
-     <form class="signup-form" @submit.prevent="onSubmit"> <!--@submit.prevent="onSubmit" -->
+     <form class="signup-form" @submit.prevent="onSubmit"> 
       <div class="form-header">
         <h1>Employee Enrolment</h1>
       </div>
@@ -26,42 +29,44 @@
             </div>
             <div class="horizontal-group">
               <div class="form-group left" >
-                <label for="file">Upload photo</label>
-                <input type="file" @change="previewImage" accept="image"/> 
+                <input type="file" accept="image/*" @change="imageContainer" required="required"/> 
               </div>
-              <!-- <div class="form-group right" >
-                <img src="" alt="" id="image">
-              </div> -->
+              <div class="form-group right" >
+                <img :src="photoUrl" alt="Upload photo" height="100">
+              </div>
 
             </div>           
         </div>            
       </div>
       <div class="form-footer">        
-          <button type="submit" class="button" >Create</button>      
+          <button type="submit" class="button">Create</button>      
       </div>
     </form>    
   </div>
-  <button @click="logout">Logout</button>
+ 
 </template>
 
 <script>
 import { getAuth, signOut } from 'firebase/auth';
 import router from '@/router';
-import { ref, toRef } from 'vue';
+import { ref, toRef, toRefs } from 'vue';
 import { doc, addDoc } from 'firebase/firestore';
 import { getStorage, ref as storageReference, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { employees } from '@/firebase';
 
 export default ({
   setup() {
-    
     const auth = getAuth();
     const firstName = ref();
     const lastName = ref();
     const employeeNumber = ref();
     const designation = ref();
-    const photoUrl = ref();
-    
+    let photoUrl = ref();
+    let preview = ref();
+    let files = ref();
+    let fileName = ref();
+    let image = ref();   
+
     const logout = () => {
       signOut(auth).then(() => {
         console.log('signed out');
@@ -71,48 +76,61 @@ export default ({
         console.log(error.message);
       })
     }
-    // working... pushing data to firestore
+    // working... pushing data and image to firestore 
     const onSubmit = async () => {
+      
+      const storage = getStorage();
+      const storageRef = storageReference(storage, 'public/' + image.name);
+      //console.log(storageRef);
+      uploadBytes(storageRef, image).then((snapshot) => {
+          console.log('Uploaded a file!');
+          getDownloadURL(storageRef).then((url) => {
+            photoUrl = url;
+            console.log('downLoad Url', photoUrl);  
+          })
+          .catch((error) => {
+          alert(error.message);
+          })
+      })
+
       const test = {
         firstName: firstName.value,
         lastName: lastName.value,
         employeeNumber: employeeNumber.value,
         designation: designation.value,
-        photoUrl: photoUrl.value  
-      };
-      //console.log(test);
+        photoUrl: photoUrl  
+      };  
+      console.log(test);
       await addDoc(employees, test);
       alert('user was created!');
       router.push('hrView');
       console.log('recorded!');  
     }
 
-     //Upload photo...
-    const previewImage =  (event) => {
-      const file = event.target.files[0];
-      const storage = getStorage();
-      const storageRef = storageReference(storage, 'public/' + file.name); // include in addDoc
-      uploadBytes (storageRef, file).then((snapshot) => {
-        console.log('uploaded');
-        getDownloadURL(storageRef).then((url) => {
-          photoUrl.value = url;
-          console.log(url);  
-        })
-        .catch((error) => {
-        alert(error.meesage);
-        })
-      })
-     console.log('upload first', file.name);
-  }
-
+    
+    // method for getting image file
+    function imageContainer(event) {
+       preview = document.querySelector('img');
+       const files = event.target.files;
+       photoUrl = new FileReader();
+       photoUrl.addEventListener('load', () => {
+         preview.src = photoUrl.result;
+         photoUrl = photoUrl.result;
+       })
+       photoUrl.readAsDataURL(files[0]);
+       image = files[0];
+       console.log('image:',image);
+    }
+    
     return { logout,  
             firstName, 
             lastName, 
             employeeNumber, 
             designation, 
             photoUrl,
+            image,
             onSubmit,
-            previewImage
+            imageContainer
            };
   }
 
@@ -120,6 +138,13 @@ export default ({
 </script>
 
 <style scoped>
+body {
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  margin: 10px 10px;
+}
 .signup-form {
   font-family: "Roboto", sans-serif;
   width:650px;
@@ -231,19 +256,66 @@ input[type="file"] {
   background-color: #169c7b;
   color:white;
 }
-a {
-  background-color: #999;
-  color: white;
-  padding: 10px 25px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-a:hover {
+
+/* a:hover {
   background-color: rgb(161, 161, 201);
   color: white;
+} */
+
+/* nav {
+  padding: 20px;
+  background-color: rgb(112, 110, 110);
+} */
+/* nav a {
+  background-color: rgb(69, 69, 128);
+  color: white;
+  font-size: small;
+  padding: 8px 10px;
+  text-decoration: none; 
+  border-radius: 5px;   
+} */
+/* nav a:hover {
+  color: rgb(206, 194, 194);
+} */
+#hrview {
+  padding: 35px;
 }
-#uploadPic {  
-  width: 150px;
-  text-align: center;
+a.toList {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: -20px;
+  top: -50px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: medium;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:rgb(69, 69, 128);
+  left: -20px;
+  /* transition: all 0.2s; */
 }
+a.toList:hover {
+  background-color:#4095c6;
+}
+#logout { 
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: none;
+  box-sizing: border-box;
+  font-size: medium;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:rgb(69, 69, 128);
+  float: right;
+  margin-top: -20px;
+}
+/* @media all and (max-width: 30em) {
+  a.toList {
+    display: block;
+    margin: 0.1em auto;
+  }
+} */
+
 </style>

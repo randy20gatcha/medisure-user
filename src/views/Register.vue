@@ -1,4 +1,7 @@
-<template> 
+<template>
+  <nav>
+    <a href="/" >Back to Login</a>
+  </nav> 
   <h1>Register here!</h1>
   <form>  
     <p><input type="email" placeholder="Email" v-model="email" /></p>
@@ -12,7 +15,8 @@ import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import { ref } from 'vue';
 import router from '@/router';
 
-export default {    
+export default { 
+  
 setup() {
  const auth = getAuth();
  const email = ref("");
@@ -24,7 +28,8 @@ setup() {
         router.push('/portal');
       })
       .catch(error => {
-        console.log(error.code);   
+        console.log(error.code); 
+        alert('Please fill up the details');  
       });
     }
       return { email , password, signup }
@@ -32,6 +37,8 @@ setup() {
 }   
 </script>
 
-<style>
-
+<style scoped>
+h1 {
+  margin: 20px;
+}
 </style>

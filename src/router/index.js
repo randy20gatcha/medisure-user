@@ -5,6 +5,7 @@ import Portal from '../views/Portal.vue';
 import HrView from '../views/HrView.vue';
 import ForCompany from '../components/ForCompany.vue';
 import ForClient from '../components/ForClient.vue';
+import EditUser from '../components/EditUser.vue';
 import { getUserState } from '@/firebase';
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
     path: '/forClient/:userId',
     name: 'forClient',
     component: ForClient
+  },
+  {
+    path: '/editUser/:userId',
+    name: 'editUser',
+    component: EditUser
   }
 ]
 

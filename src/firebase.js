@@ -1,19 +1,24 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
+//import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, doc, getDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { useRoute } from 'vue-router';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCJGEW-0MofgYgEdAWdXW6YoOB_o3J8JwI",
-    authDomain: "medisure-crud.firebaseapp.com",
-    projectId: "medisure-crud",
-    storageBucket: "medisure-crud.appspot.com",
-    messagingSenderId: "943820419606",
-    appId: "1:943820419606:web:70bcae12737b605be67b37"
-  };
+  apiKey: "AIzaSyCmQgMnR_ICP725-K955zvXl_dGTOn_-_M",
+  authDomain: "medisure-hr.firebaseapp.com",
+  projectId: "medisure-hr",
+  storageBucket: "medisure-hr.appspot.com",
+  messagingSenderId: "872457171489",
+  appId: "1:872457171489:web:cd851084a1468aabf16960",
+  //measurementId: "G-71DBCCS6B9"
+};
+
+
 const app = initializeApp(firebaseConfig);
+//const analytics = getAnalytics(app);
 
 // get db
  const db = getFirestore(app);

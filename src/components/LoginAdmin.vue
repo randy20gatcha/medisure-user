@@ -1,4 +1,7 @@
 <template>
+ <nav>
+    <a href="/register" >Register here</a> 
+ </nav>
   <h1 id="medi">Medi<span id="sure">Sure</span><sup>Plus</sup></h1>
   <div class="main-box">
       <div class="inside-box">
@@ -22,6 +25,7 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { ref } from 'vue';
 import router from '@/router';
+
 export default ({
  setup() {
      const auth = getAuth();
@@ -32,7 +36,7 @@ export default ({
          signInWithEmailAndPassword(auth, email.value, password.value)
          .then((cred) => {  
           console.log('active',cred.user);
-          router.push('/portal');
+          router.push('/hrView');
       })
       .catch(error => {
         alert('Please fill in username and password.',error.message);   
@@ -79,6 +83,7 @@ button {
 }
 #medi {
     color: #bdbdbd;
+    margin: 20px;
 }
 #sure {
     color: #deded8;

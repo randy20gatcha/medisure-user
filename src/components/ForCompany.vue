@@ -1,4 +1,7 @@
 <template>
+<nav>
+  <router-link :to="{ path: `/hrView` }" id="toHrView">Back to List</router-link>
+</nav>
 <div class="container">
   <div class="row">
     <div class="column">
@@ -21,7 +24,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
 </template>
 
 <script >
@@ -72,6 +75,30 @@ img {
  top: 58%;
  left: 50%;
  transform: translate(-50%, -50%);
+}
+#toHrView {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0 50px 0;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:rgb(69, 69, 128);
+  transition: all 0.2s;
+  position: relative;
+  right: 149px;
+}
+#toHrView:hover {
+  background-color:#4095c6;
+}
+@media all and (max-width: 30em) {
+  #toHrView {
+    display: block;
+    margin: 0.2em auto;
+  }
 }
 
 </style>

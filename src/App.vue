@@ -6,25 +6,34 @@
 
 </script>
 
-<style>
+<style >
 #app {
-  font-family: 'Roboto ', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
   text-align: center;
   color: #2c3e50;
 }
+
 body {
     background-color: #558b2f;
-    padding: 50px;
+    padding: 0;
+    margin: 0;    
 }
 nav {
-  padding: 30px;
+  padding: 20px;
+  background-color: rgb(112, 110, 110);
 }
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
   text-decoration: none;
+  font-family: 'Roboto';
+  float: left;
+  margin-top: -10px;  
+}
+nav a:hover {
+  color: rgb(206, 194, 194);
 }
 
 </style>
