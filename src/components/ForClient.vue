@@ -67,6 +67,25 @@ export default ({
 })
 </script>
 
-<style>
-
+<style scoped>
+.container {
+    height: 100vh
+}
+.card {
+    width: 400px;
+    border: none;
+    height: 510px;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+img {
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 50%;
+}
 </style>  

@@ -47,7 +47,7 @@ export default ({
   }
 })
 </script>
-<style>
+<style scoped>
 /* body {
     background-color: #eee
 } */
@@ -56,7 +56,12 @@ export default ({
 }
 .card {
     width: 400px;
-    border: none
+    border: none;
+    height: 510px;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 img {
   width: 100px;
@@ -69,14 +74,8 @@ img {
 #app {
   position: relative;
 }
-.card {
- height: 700px;
- position: absolute;
- top: 58%;
- left: 50%;
- transform: translate(-50%, -50%);
-}
-#toHrView {
+
+/* #toHrView {
   text-decoration: none;
   display: inline-block;
   padding: 0.3em 1.2em;
@@ -90,9 +89,9 @@ img {
   transition: all 0.2s;
   position: relative;
   right: 149px;
-}
+} */
 #toHrView:hover {
-  background-color:#4095c6;
+  color:#dadee2;
 }
 @media all and (max-width: 30em) {
   #toHrView {
