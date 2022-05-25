@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "medisure-crud"
-  }
+    "default": "medisure-hr",
+    "medisure-hr": "medisure-hr"
+  },
+  "targets": {}
 }
