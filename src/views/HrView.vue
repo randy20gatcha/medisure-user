@@ -22,7 +22,7 @@
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.designation }}</td>
                 <td>
-                  <router-link :to="{ path: `/forCompany/${ user.id }` }">Details</router-link>
+                  <router-link :to="{ path: `/forCompany/${ user.id }` }" id="details">Details</router-link>
                   <button  id="delete" @click="deleteUser(user.id, user.firstName)" >Delete</button>
                   <router-link :to="{ path: `/editUser/${ user.id }` }" id="edit">Edit</router-link>
                 </td>
@@ -88,7 +88,7 @@ h2 {
   margin-top: 10px;
   color: #ffffff;
 }
-a {
+#details {
   background-color: rgb(69, 69, 128);
   color: white;
   font-size: small;
@@ -99,9 +99,11 @@ a {
 #delete {
   background-color: rgb(221, 66, 66);
   color: white;
+  margin: 5px;
   padding: 5px 8px;
   font-size: small;
   border: none;
+  border-radius: 5px;
   height: 30px;
   width: 70px;
 }
@@ -111,11 +113,10 @@ a {
 #edit {
   background-color: #9da1a3;
   color: white;
-  padding: 5px 8px;
   font-size: small;
-  border: none;
-  height: 30px;
-  width: 70px;
+  padding: 8px 15px;
+  text-decoration: none; 
+  border-radius: 5px;
 }
 #edit:hover {
   background-color: rgb(139, 130, 130);

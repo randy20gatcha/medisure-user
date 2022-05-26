@@ -241,7 +241,7 @@ input[type="file"] {
   font-style: italic;
   font-weight: thin;
 }
-
+/* create button selector */
 .button {
    display:inline-block;
    padding:10px 10px;

@@ -1,7 +1,7 @@
 <template>
- <nav>
+ <!-- <nav>
     <a href="/register" >Register here</a> 
- </nav>
+ </nav> -->
   <h1 id="medi">Medi<span id="sure">Sure</span><sup>Plus</sup></h1>
   <div class="main-box">
       <div class="inside-box">
@@ -83,7 +83,7 @@ button {
 }
 #medi {
     color: #bdbdbd;
-    margin: 20px;
+    margin: 50px;
 }
 #sure {
     color: #deded8;
