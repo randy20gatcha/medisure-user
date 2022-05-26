@@ -1,4 +1,7 @@
 <template>
+ <div id="title">
+  <h4 id="medi">Medi<span id="sure">Sure</span><sup>Plus</sup></h4>
+ </div>
  <div class="container">
   <div class="row">
     <div class="column">
@@ -68,15 +71,24 @@ export default ({
 </script>
 
 <style scoped>
+#title {
+  margin-top: 30px;
+}
+#medi {
+    color: #bdbdbd;
+}
+#sure {
+    color: #deded8;
+}
 .container {
     height: 100vh
 }
 .card {
     width: 400px;
     border: none;
-    height: 510px;
+    height: 490px;
     position: absolute;
-    top: 52%;
+    top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

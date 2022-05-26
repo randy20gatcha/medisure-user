@@ -8,15 +8,20 @@
       <div class="form-header">
           <h2>update details</h2>
       </div>
-          <div class="form-group">
+           <div class="horizontal-group">
+              <div class="form-group right" >
+                <img :src="store.photoUrl" alt="Upload photo" height="100">
+              </div>
+            </div>    
+          <div class="form-group ">
               <label for="text">First Name:</label>
               <input type="text" v-model="store.firstName" style="width: 200px;">
           </div>
-           <div class="form-group">
+           <div class="form-group ">
               <label for="text">Last Name:</label>
               <input type="text"  v-model="store.lastName" style="width: 200px;">
           </div>
-           <div class="form-group">
+           <div class="form-group ">
               <label for="text">Designation:</label>
               <input type="text"  v-model="store.designation" style="width: 200px;">
           </div>
@@ -88,5 +93,8 @@ input {
   color:#666;
   padding:20px 0;
   border-bottom:1px solid #cccccc;
+}
+img {
+    margin-bottom: 10px;
 }
 </style>
