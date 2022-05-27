@@ -27,7 +27,7 @@ export const useStore = defineStore("userStore", {
             this.lastName = userRef.lastName;
             this.designation = userRef.designation;
             this.employeeNumber = userRef.employeeNumber;
-            this.str = 'http://192.168.1.3:8080/forClient/' + userId;
+            this.str = 'https://medisure-hr.web.app/forClient/' + userId;
             })  
         },
         async getData() {  // this method's function is to fill-in data table for HR view
