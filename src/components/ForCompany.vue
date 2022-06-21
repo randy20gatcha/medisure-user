@@ -1,6 +1,6 @@
 <template>
 <nav>
-  <router-link :to="{ path: `/hrView` }" id="toHrView">Back to List</router-link>
+  <!-- <router-link :to="{ path: `/hrView` }" id="toHrView">Back to List</router-link> -->
 </nav>
 <div class="container">
   <div class="row">
@@ -14,8 +14,8 @@
           <p>{{ store.designation }}</p>
           <p>Employee Number: {{ store.employeeNumber }}</p>
           <div>
-            <p>medisure-hr@medisure.com<br>
-            HR mobile number: 09172346789</p>
+            <p>mso.admin@medisureonline.com<br>
+            HR mobile number: +639201562291</p>
           </div>
           <div >
            <qrcode-vue v-if="store.str" :value="store.str"  level="H" /> 

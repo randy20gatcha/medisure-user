@@ -14,8 +14,8 @@
           <p>{{ store.designation }}</p>
           <p>Employee Number: {{ store.employeeNumber }}</p>
           <div>
-            <p>medisure-hr@medisure.com<br>
-            HR mobile number: 09172346789</p>
+            <p>mso.admin@medisureonline.com<br>
+            HR mobile number: +639201562291</p>
           </div>
         </div>
       </div>

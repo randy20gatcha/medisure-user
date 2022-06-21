@@ -1,9 +1,19 @@
 <template>
-  <nav id="hrview">
-    <a href="hrView" class="toList">List</a>
-    <h4>Medi<span>Sure</span><sup>Plus</sup></h4>
-    <button @click="logout" id="logout">Logout</button>
+  <header>
+  <nav>
+   <div class="divList">
+     <a href="../hrView" class="navLinks">List</a>
+   </div>
+   <div class="divLogout">
+     <a href="#" class="navLinks" @click="logout">Logout</a>
+   </div>
+   <div class="divBrand">
+     <h4>Medi<span>Sure</span><sup>Plus</sup></h4>
+   </div>
+   <div class="divLogo">
+   </div>
   </nav>
+</header>
    <h2>Portal</h2>
   <div class="container-fluid">
      <form class="signup-form" @submit.prevent="onSubmit"> 
@@ -145,6 +155,39 @@ body {
 }
 h2 {
   margin: 10px 10px;
+}
+nav {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: larger;
+  display: grid;
+  grid-template-columns: 50px 650px;
+  grid-auto-rows: auto;
+  grid-gap: 1em;
+  align-items: center;
+  text-align: center;
+}
+ 
+.divList {
+  grid-column: 1;
+  padding: 10px;
+}
+.divLogout {
+  grid-column: 2;
+  padding: 10px;
+  width: 10px;
+}
+.divBrand {
+  grid-column: 3;
+  display: inline;
+}
+.divLogo {
+  grid-column: 5;
+  background-image: url("../assets/MSO_Logo.gif");
+  background-size: 80px 80px;
+  background-position:  150px;
+  float: right;
+  background-repeat: no-repeat;
+  height: 10vh;
 }
 .signup-form {
   font-family: "Roboto", sans-serif;

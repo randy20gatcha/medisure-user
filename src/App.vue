@@ -20,7 +20,7 @@ body {
     margin: 0;    
 }
 nav {
-  padding: 15px;
+  
   background-color: rgb(156, 153, 153);
 }
 h4 {

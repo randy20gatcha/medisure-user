@@ -1,9 +1,19 @@
 <template>
-<nav>
-  <router-link :to="{ path: `/portal` }" class="toPortal">Create</router-link>
-    <h4>Medi<span>Sure</span><sup>Plus</sup></h4>
-   <button @click="logout" id="logout">Logout</button>
-</nav>
+<header>
+  <nav>
+   <div class="divCreate">
+     <a href="../portal" class="navLinks">Create</a>
+   </div>
+   <div class="divLogout">
+     <a href="#" class="navLinks" @click="logout">Logout</a>
+   </div>
+   <div class="divBrand">
+     <h4>Medi<span>Sure</span><sup>Plus</sup></h4>
+   </div>
+   <div class="divLogo">
+   </div>
+  </nav>
+</header>
 <div>
   <h2 style="position:relative;">Employee List</h2>
 </div>
@@ -22,7 +32,8 @@
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.designation }}</td>
                 <td>
-                  <router-link :to="{ path: `/forCompany/${ user.id }` }" id="details">Details</router-link>
+                  <router-link :to="{ path: `/forCompany/${ user.id }` }" id="details" target="_blank"
+                  rel="noopener noreferrer">Details</router-link>
                   <button  id="delete" @click="deleteUser(user.id, user.firstName)" >Delete</button>
                   <router-link :to="{ path: `/editUser/${ user.id }` }" id="edit">Edit</router-link>
                 </td>
@@ -84,9 +95,12 @@ export default ({
 </script>
 
 <style scoped>
+h4 {
+  margin-top: 10px;
+  color: #384441; 
+}
 h2 {
   margin-top: 10px;
-  color: #ffffff;
 }
 #details {
   background-color: rgb(69, 69, 128);
@@ -122,11 +136,39 @@ h2 {
   background-color: rgb(139, 130, 130);
 }
 nav {
-  padding: 30px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: larger;
+  display: grid;
+  grid-template-columns: 50px 650px;
+  grid-auto-rows: auto;
+  grid-gap: 1em;
+  align-items: center;
+  text-align: center;
 }
-a:hover {
-  background-color: rgb(67, 67, 94);
+ 
+.divCreate {
+  grid-column: 1;
+  padding: 10px;
 }
+.divLogout {
+  grid-column: 2;
+  padding: 10px;
+  width: 10px;
+}
+.divBrand {
+  grid-column: 3;
+  display: inline;
+}
+.divLogo {
+  grid-column: 5;
+  background-image: url("../assets/MSO_Logo.gif");
+  background-size: 80px 80px;
+  background-position:  150px;
+  float: right;
+  background-repeat: no-repeat;
+  height: 10vh;
+}
+
 a.toPortal {
   display: inline-block;
   padding: 0.3em 1.2em;
